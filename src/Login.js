@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Login.css';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from './logo.png';
 import {auth} from "./firebase";
 
@@ -13,6 +13,12 @@ function Login() {
     {
         e.preventDefault()
 
+        auth
+            .signInWithEmailAndPassword(email,password)
+            .then(auth => {
+                navigate('/home')
+            })
+            .catch(error => alert(error.message))
         // firebase login
     }
 
@@ -25,7 +31,7 @@ function Login() {
             .then((auth) => {
                 console.log(auth);
                 if(auth){
-                    navigate('/')
+                    navigate('/home')
                 }
             })
             .catch(error => alert(error.message))

@@ -15,10 +15,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PieChart } from 'react-minimal-pie-chart';
 import logo from './logo.png';
 ////////////////////////////////////////////////////
+import {useStateValue} from './StateProvider';
+import {auth} from "./firebase";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
-
-  const [value1, setValue1] = useState("");
+	const navigate = useNavigate();
+  	const [value1, setValue1] = useState("");
 	const [value2, setValue2] = useState("");
 	const [value3, setValue3] = useState("");
 	const [value4, setValue4] = useState("");
@@ -58,6 +61,15 @@ function Home() {
 			renderSwitchCitrus(value13) + renderSwitchRice(value14) + renderSwitchBeans(value15) + renderSwitchBread(value16)
 	}
 
+	const [{user}, dispatch] = useStateValue();
+	const handleAuthentication = () => {
+		if (user)
+		{
+			auth.signOut();
+			navigate('/');
+		}
+	}
+
   return (
     <div>
      
@@ -77,9 +89,11 @@ function Home() {
 
 
 						<Col>
-							
-							<form onSubmit={handleData}>
-
+							<div>
+								Signed in as: {user.email}
+							</div>
+							<form onSubmit={handleAuthentication}>
+								
 								<h1 style={{ fontSize: 22, color: "brown" }}>
 									Meat Products
 								</h1>
@@ -225,10 +239,14 @@ function Home() {
 								<br />
 								Calculation is based on information provided by United States Environmental | Protection Agency.
 								<br />
-
+								<br />
+								<br />
+								<Button type="submit" style={{
+									font: 'inherit', cursor: 'pointer',
+									border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
+								}}>Sign out </Button>
 							</form>
-							<br />
-							<br />
+							
 
 							<br /><br />
 							<br /><br />
