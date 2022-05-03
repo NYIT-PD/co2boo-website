@@ -24,17 +24,7 @@ function Login() {
 
     const register = e =>
     {
-        e.preventDefault()
-
-        auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((auth) => {
-                console.log(auth);
-                if(auth){
-                    navigate('/home')
-                }
-            })
-            .catch(error => alert(error.message))
+        navigate('/create-account')
     }
 
 
@@ -68,7 +58,7 @@ function Login() {
                 By siging-in you agree to the conditions of Use. Please see our Privacy Notice, our Cookies Notice and our Interest based Ads Notice.
             </p>
             <button onClick = {register}
-            className='login__registerButton'>Create your co2boo account</button>
+            className='login__registerButton'>Create your CO2boo account</button>
         </div>
     </div>
     
