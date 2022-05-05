@@ -16,15 +16,15 @@ import { PieChart } from 'react-minimal-pie-chart';
 import logo from './logo.png';
 ////////////////////////////////////////////////////
 import {useStateValue} from './StateProvider';
-import {auth} from "./firebase";
+import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
 	const navigate = useNavigate();
-  	const [value1, setValue1] = useState("");
-	const [value2, setValue2] = useState("");
-	const [value3, setValue3] = useState("");
-	const [value4, setValue4] = useState("");
+  	const [chicken, setChicken] = useState("");
+	const [beef, setBeef] = useState("");
+	const [fish, setFish] = useState("");
+	const [lamb, setLamb] = useState("");
 	const [value5, setValue5] = useState("");
 	const [value6, setValue6] = useState("");
 	const [value7, setValue7] = useState("");
@@ -37,6 +37,38 @@ function Home() {
 	const [value14, setValue14] = useState("");
 	const [value15, setValue15] = useState("");
 	const [value16, setValue16] = useState("");
+	const [error, setError] = useState('');
+	const [chickenCO2, setChickenCO2] = useState("");
+
+	function createFoodBase(uid){
+		
+        db.collection('Food Info').add({
+            chicken: chickenCO2,
+            beef: beef,
+			fish: fish,
+			lamb: lamb,
+			value5: value5,
+			email:user.email,
+			uid: uid
+        });
+    };
+
+	const recordFood = e =>
+    {
+        e.preventDefault()
+        setError('')
+
+        
+                if(auth){
+                    var uid = user.uid
+                    createFoodBase(uid);
+                    console.log(uid)
+                    navigate('/home')
+                }
+       
+    }
+
+
 
   function handleData(e) {
 		e.preventDefault()
@@ -55,7 +87,7 @@ function Home() {
 	}
 
   function calculateTotal() {
-		return renderSwitchChicken(value1) + renderSwitchBeef(value2) + renderSwitchFishFarmed(value3) + renderSwitchLamb(value4) +
+		return renderSwitchChicken(chicken) + renderSwitchBeef(beef) + renderSwitchFishFarmed(fish) + renderSwitchLamb(lamb) +
 			renderSwitchBanana(value5) + renderSwitchApple(value6) + renderSwitchAvocado(value7) + renderSwitchBerriesAndGrapes(value8) +
 			renderSwitchTomatoes(value9) + renderSwitchPotatoes(value10) + renderSwitchNuts(value11) + renderSwitchOatmeal(value12) +
 			renderSwitchCitrus(value13) + renderSwitchRice(value14) + renderSwitchBeans(value15) + renderSwitchBread(value16)
@@ -100,26 +132,27 @@ function Home() {
 								<Row>
 
 									<Col>
-										Chicken (75g) {showOptions(value1, (e) => setValue1(e.target.value))}
-										{renderSwitchChicken(value1)} kg of CO2 emitted.
+										Chicken (75g) {showOptions(chicken, (e) => setChicken(e.target.value))}
+											
+										{renderSwitchChicken(chicken)} kg of CO2 emitted.
 										<br />
 									</Col>
 
 									<Col>
-										Beef (75g) {showOptions(value2, (e) => setValue2(e.target.value))}
-										{renderSwitchBeef(value2)} kg of CO2 emitted.
+										Beef (75g) {showOptions(beef, (e) => setBeef(e.target.value))}
+										{renderSwitchBeef(beef)} kg of CO2 emitted.
 										<br />
 									</Col>
 
 									<Col>
-										Fish (140g) {showOptions(value3, (e) => setValue3(e.target.value))}
-										{renderSwitchFishFarmed(value3)} kg of CO2 emitted.
+										Fish (140g) {showOptions(fish, (e) => setFish(e.target.value))}
+										{renderSwitchFishFarmed(fish)} kg of CO2 emitted.
 										<br />
 									</Col>
 
 									<Col>
-										Lamb (75g) {showOptions(value4, (e) => setValue4(e.target.value))}
-										{renderSwitchLamb(value4)} kg of CO2 emitted.
+										Lamb (75g) {showOptions(lamb, (e) => setLamb(e.target.value))}
+										{renderSwitchLamb(lamb)} kg of CO2 emitted.
 										<br />
 									</Col>
 								</Row>
@@ -223,7 +256,7 @@ function Home() {
 								<br />
 								This data was based mainly on the BBC Carbon Footprint Emission values.
 								<br />
-								<Button type="submit" style={{
+								<Button onClick={recordFood} type="submit" style={{
 									font: 'inherit', cursor: 'pointer',
 									border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
 								}}>Submit </Button>
@@ -241,7 +274,7 @@ function Home() {
 								<br />
 								<br />
 								<br />
-								<Button type="submit" style={{
+								<Button  type="submit" style={{
 									font: 'inherit', cursor: 'pointer',
 									border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
 								}}>Sign out </Button>
@@ -266,18 +299,18 @@ function Home() {
 								<PieChart
 									data={[
 										{
-											title: 'Chicken ' + Math.round(renderSwitchChicken(value1) / (calculateTotal()) * 100) + '%', value: renderSwitchChicken(value1), color: '#f0f8ff'
+											title: 'Chicken ' + Math.round(renderSwitchChicken(chicken) / (calculateTotal()) * 100) + '%', value: renderSwitchChicken(chicken), color: '#f0f8ff'
 										},
 										{
-											title: 'Beef ' + Math.round(renderSwitchBeef(value2) / (calculateTotal()) * 100) + '%', value: renderSwitchBeef(value2), color: '#E38627'
-										},
-
-										{
-											title: 'Fish ' + Math.round(renderSwitchFishFarmed(value3) / (calculateTotal()) * 100) + '%', value: renderSwitchFishFarmed(value3), color: '#faebd7'
+											title: 'Beef ' + Math.round(renderSwitchBeef(beef) / (calculateTotal()) * 100) + '%', value: renderSwitchBeef(beef), color: '#E38627'
 										},
 
 										{
-											title: 'Lamb ' + Math.round(renderSwitchLamb(value4) / (calculateTotal()) * 100) + '%', value: renderSwitchLamb(value4), color: '#a52a2a'
+											title: 'Fish ' + Math.round(renderSwitchFishFarmed(fish) / (calculateTotal()) * 100) + '%', value: renderSwitchFishFarmed(fish), color: '#faebd7'
+										},
+
+										{
+											title: 'Lamb ' + Math.round(renderSwitchLamb(lamb) / (calculateTotal()) * 100) + '%', value: renderSwitchLamb(lamb), color: '#a52a2a'
 										},
 										{
 											title: 'Banana ' + Math.round(renderSwitchBanana(value5) / (calculateTotal()) * 100) + '%', value: renderSwitchBanana(value5), color: '#194d33'
