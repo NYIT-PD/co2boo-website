@@ -8,6 +8,8 @@ import React, {useEffect} from "react";
 import {auth} from "./firebase"
 import {useStateValue} from "./StateProvider";
 
+
+
 function App() {
   const [{}, dispatch] = useStateValue();
 

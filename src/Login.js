@@ -3,6 +3,9 @@ import './Login.css';
 import { useNavigate } from "react-router-dom";
 import logo from './logo.png';
 import {auth} from "./firebase";
+import {Button} from "./components/Button"
+
+import Navbar from './components/navbar/Navbar';
 
 function Login() {
     const navigate = useNavigate();
@@ -31,7 +34,6 @@ function Login() {
 
   return (
     <div className='login'>
-
         <div className = "login__logo">
              <img src = {logo}/>
         </div>
@@ -48,9 +50,9 @@ function Login() {
                 <input type = 'password' value = {password} onChange =
                 {e => setPassword(e.target.value)}/>
                 
-                <button type = 'submit' onClick = {signIn}
+                <Button type = 'submit' onClick = {signIn}
                 className='login__signInButton'>Sign In
-                </button>
+                </Button>
 
             </form>
 

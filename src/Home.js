@@ -19,6 +19,10 @@ import {useStateValue} from './StateProvider';
 import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
 
+import Navbar from './components/navbar/Navbar';
+
+
+
 function Home() {
 	const navigate = useNavigate();
   	const [chicken, setChicken] = useState("");
@@ -104,7 +108,7 @@ function Home() {
 
   return (
     <div>
-     
+      <Navbar/>
       <h1 align = "center" style={{ fontSize: 30, color: "" }}>
         <div className = "login__logo">
              <img src = {logo}/>
