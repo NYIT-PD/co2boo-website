@@ -19,7 +19,7 @@ function Login() {
         auth
             .signInWithEmailAndPassword(email,password)
             .then(auth => {
-                navigate('/home')
+                navigate('/daily-logs')
             })
             .catch(error => alert(error.message))
         // firebase login

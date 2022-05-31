@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PieChart } from 'react-minimal-pie-chart';
 import logo from './logo.png';
 ////////////////////////////////////////////////////
-import {useStateValue} from './StateProvider';
+import {useStateValue} from './components/dailylogs/StateProvider';
 import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
 
@@ -61,8 +61,6 @@ function Home() {
     {
         e.preventDefault()
         setError('')
-
-        
                 if(auth){
                     var uid = user.uid
                     createFoodBase(uid);
@@ -121,15 +119,11 @@ function Home() {
 
       <Container>
 				<Row>
-
-
-
 						<Col>
 							<div>
-								Signed in as: {user.email}
+							Signed in as: {user.email}
 							</div>
 							<form onSubmit={handleAuthentication}>
-								
 								<h1 style={{ fontSize: 22, color: "brown" }}>
 									Meat Products
 								</h1>
