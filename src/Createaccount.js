@@ -33,6 +33,8 @@ function Createaccount() {
         }
         return isValid
       }
+
+      
     
     function createUserProfile(uid){
         db.collection('UserInfo').add({

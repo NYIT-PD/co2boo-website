@@ -25,30 +25,35 @@ function Home() {
 	const [beef, setBeef] = useState("");
 	const [fish, setFish] = useState("");
 	const [lamb, setLamb] = useState("");
-	const [value5, setValue5] = useState("");
-	const [value6, setValue6] = useState("");
-	const [value7, setValue7] = useState("");
-	const [value8, setValue8] = useState("");
-	const [value9, setValue9] = useState("");
-	const [value10, setValue10] = useState("");
-	const [value11, setValue11] = useState("");
-	const [value12, setValue12] = useState("");
-	const [value13, setValue13] = useState("");
-	const [value14, setValue14] = useState("");
-	const [value15, setValue15] = useState("");
-	const [value16, setValue16] = useState("");
+	const [banana, setBanana] = useState(""); //banana
+	const [apple, setApple] = useState(""); //apple
+	const [value7, setValue7] = useState(""); //avocado
+	const [value8, setValue8] = useState(""); //grape
+	const [value9, setValue9] = useState(""); //tomato
+	const [value10, setValue10] = useState(""); //potato
+	const [value11, setValue11] = useState(""); //pepper
+	const [value12, setValue12] = useState(""); //onion
+	const [value13, setValue13] = useState(""); //wheat flour
+	const [value14, setValue14] = useState(""); //rice
+	const [value15, setValue15] = useState(""); //rye flour
+	const [value16, setValue16] = useState(""); //corn
 	const [error, setError] = useState('');
 	const [chickenCO2, setChickenCO2] = useState("");
 
 	function createFoodBase(uid){
 		
-        db.collection('Food Info').add({
-            chicken: chickenCO2,
-            beef: beef,
-			fish: fish,
-			lamb: lamb,
-			value5: value5,
+        db.collection('users')
+		.doc(user.uid)
+		.collection('food info')
+		.add({
+            chicken: renderSwitchChicken(chicken),
+            beef: renderSwitchBeef(beef),
+			fish: renderSwitchFishFarmed(fish),
+			lamb: renderSwitchLamb(lamb),
+			banana: renderSwitchBanana(banana),
+			apple: renderSwitchApple(apple),
 			email:user.email,
+			//date and specific time
 			uid: uid
         });
     };
@@ -88,7 +93,7 @@ function Home() {
 
   function calculateTotal() {
 		return renderSwitchChicken(chicken) + renderSwitchBeef(beef) + renderSwitchFishFarmed(fish) + renderSwitchLamb(lamb) +
-			renderSwitchBanana(value5) + renderSwitchApple(value6) + renderSwitchAvocado(value7) + renderSwitchBerriesAndGrapes(value8) +
+			renderSwitchBanana(banana) + renderSwitchApple(apple) + renderSwitchAvocado(value7) + renderSwitchBerriesAndGrapes(value8) +
 			renderSwitchTomatoes(value9) + renderSwitchPotatoes(value10) + renderSwitchNuts(value11) + renderSwitchOatmeal(value12) +
 			renderSwitchCitrus(value13) + renderSwitchRice(value14) + renderSwitchBeans(value15) + renderSwitchBread(value16)
 	}
@@ -165,14 +170,14 @@ function Home() {
 								<Row>
 
 									<Col>
-										Banana (1) {showOptions(value5, (e) => setValue5(e.target.value))}
-										{renderSwitchBanana(value5)} kg of CO2 emitted.
+										Banana (1) {showOptions(banana, (e) => setBanana(e.target.value))}
+										{renderSwitchBanana(banana)} kg of CO2 emitted.
 										<br />
 									</Col>
 
 									<Col>
-										Apples (1) {showOptions(value6, (e) => setValue6(e.target.value))}
-										{renderSwitchApple(value6)} kg of CO2 emitted.
+										Apples (1) {showOptions(apple, (e) => setApple(e.target.value))}
+										{renderSwitchApple(apple)} kg of CO2 emitted.
 										<br />
 									</Col>
 									<Col>
@@ -313,11 +318,11 @@ function Home() {
 											title: 'Lamb ' + Math.round(renderSwitchLamb(lamb) / (calculateTotal()) * 100) + '%', value: renderSwitchLamb(lamb), color: '#a52a2a'
 										},
 										{
-											title: 'Banana ' + Math.round(renderSwitchBanana(value5) / (calculateTotal()) * 100) + '%', value: renderSwitchBanana(value5), color: '#194d33'
+											title: 'Banana ' + Math.round(renderSwitchBanana(banana) / (calculateTotal()) * 100) + '%', value: renderSwitchBanana(banana), color: '#194d33'
 										},
 
 										{
-											title: 'Apple ' + Math.round(renderSwitchApple(value6) / (calculateTotal()) * 100) + '%', value: renderSwitchApple(value6), color: '#7fffd4'
+											title: 'Apple ' + Math.round(renderSwitchApple(apple) / (calculateTotal()) * 100) + '%', value: renderSwitchApple(apple), color: '#7fffd4'
 										},
 
 										{

@@ -3,6 +3,7 @@ import './App.css';
 import Login from "./Login";
 import Home from "./Home";
 import Createaccount from './Createaccount';
+
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import React, {useEffect} from "react";
 import {auth} from "./firebase"
@@ -47,6 +48,7 @@ function App() {
           <Route exact path = "/create-account"
             element = {<Createaccount />}>
           </Route>
+          
         </Routes>
       </div>
     </Router>
