@@ -3,11 +3,14 @@ import './App.css';
 import Login from "./Login";
 import Home from "./Home";
 import Createaccount from './Createaccount';
-
+import DailyLogs from './components/dailylogs/DailyLogs'
+import Profile from './components/profile/Profile'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import React, {useEffect} from "react";
 import {auth} from "./firebase"
-import {useStateValue} from "./StateProvider";
+import {useStateValue} from "./components/dailylogs/StateProvider";
+
+
 
 function App() {
   const [{}, dispatch] = useStateValue();
@@ -48,7 +51,12 @@ function App() {
           <Route exact path = "/create-account"
             element = {<Createaccount />}>
           </Route>
-          
+          <Route exact path = "/daily-logs"
+            element = {<DailyLogs />}>
+          </Route>
+          <Route exact path = "/profile"
+            element = {<Profile/>}>
+          </Route>
         </Routes>
       </div>
     </Router>

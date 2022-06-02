@@ -15,9 +15,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { PieChart } from 'react-minimal-pie-chart';
 import logo from './logo.png';
 ////////////////////////////////////////////////////
-import {useStateValue} from './StateProvider';
+import {useStateValue} from './components/dailylogs/StateProvider';
 import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
+
+import Navbar from './components/navbar/Navbar';
+
+
 
 function Home() {
 	const navigate = useNavigate();
@@ -54,7 +58,8 @@ function Home() {
 			apple: renderSwitchApple(apple),
 			email:user.email,
 			//date and specific time
-			uid: uid
+			uid: uid,
+			createdAt: new Date()
         });
     };
 
@@ -62,8 +67,6 @@ function Home() {
     {
         e.preventDefault()
         setError('')
-
-        
                 if(auth){
                     var uid = user.uid
                     createFoodBase(uid);
@@ -109,7 +112,7 @@ function Home() {
 
   return (
     <div>
-     
+      <Navbar/>
       <h1 align = "center" style={{ fontSize: 30, color: "" }}>
         <div className = "login__logo">
              <img src = {logo}/>
@@ -122,15 +125,9 @@ function Home() {
 
       <Container>
 				<Row>
-
-
-
 						<Col>
-							<div>
-								Signed in as: {user.email}
-							</div>
+							
 							<form onSubmit={handleAuthentication}>
-								
 								<h1 style={{ fontSize: 22, color: "brown" }}>
 									Meat Products
 								</h1>
@@ -259,7 +256,7 @@ function Home() {
 
 
 								<br />
-								This data was based mainly on the BBC Carbon Footprint Emission values.
+								
 								<br />
 								<Button onClick={recordFood} type="submit" style={{
 									font: 'inherit', cursor: 'pointer',
@@ -267,18 +264,13 @@ function Home() {
 								}}>Submit </Button>
 
 								<br /><br />
-								<br /><br />
-								<h1 style={{ fontSize: 29, color: "" }}>
+								<h5 style={{ fontSize: 29, color: "" }}>
 									The total amount of CO2 will be &nbsp; {calculateTotal()}
 									&nbsp; kg of CO2 in one year.
-								</h1>
+								</h5>
 
-								<br /><br />
 								<br />
-								Calculation is based on information provided by United States Environmental | Protection Agency.
-								<br />
-								<br />
-								<br />
+							
 								<Button  type="submit" style={{
 									font: 'inherit', cursor: 'pointer',
 									border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
@@ -287,11 +279,7 @@ function Home() {
 							
 
 							<br /><br />
-							<br /><br />
-							<br /> <br />
-							<br /> <br />
-							<br /> <br />
-
+							
 						</Col>
 
 
