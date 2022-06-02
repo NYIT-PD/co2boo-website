@@ -6,7 +6,6 @@ import {auth, db} from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
 
-
 function Profile(){
     const navigate = useNavigate();
     const [{user}, dispatch] = useStateValue();
@@ -20,7 +19,7 @@ function Profile(){
     return(
         <div>
             <Navbar/>
-            <div>
+            <div className='header-card'> 
                 Profile
             </div>
             <div>

@@ -18,10 +18,8 @@ import logo from './logo.png';
 import {useStateValue} from './components/dailylogs/StateProvider';
 import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
-
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import Navbar from './components/navbar/Navbar';
-
-
 
 function Home() {
 	const navigate = useNavigate();
@@ -43,7 +41,26 @@ function Home() {
 	const [value16, setValue16] = useState("");
 	const [error, setError] = useState('');
 	const [chickenCO2, setChickenCO2] = useState("");
+	const [userInfo, setUserInfo] = useState([]);
+	
+	useEffect(() =>{
+		getName()
+	}, [])
 
+	useEffect(() => {
+		console.log(userInfo)
+	}, [userInfo])
+
+	function getName(){ 
+		const userInfoRef = collection(db, "UserInfo")
+		const q = query(userInfoRef, where("emailL", "==", user.email))
+		getDocs(q)
+			.then(response => {
+				const infs = response.docs.map(doc => ({data: doc.data(), id: doc.id}))
+				setUserInfo(infs)
+			})
+			.catch(error => console.log("u suck"))
+	}
 	function createFoodBase(uid){
 		
         db.collection('Food Info').add({
@@ -57,6 +74,8 @@ function Home() {
         });
     };
 
+
+
 	const recordFood = e =>
     {
         e.preventDefault()
@@ -69,8 +88,6 @@ function Home() {
                 }
        
     }
-
-
 
   function handleData(e) {
 		e.preventDefault()
@@ -116,13 +133,13 @@ function Home() {
 			</h1>
 
 				<br /> <br />
-
       <Container>
-				<Row>
+				<Row>		
+					<ul>
+						{userInfo.map(userInfo => <h1 key={userInfo}>Welcome, {userInfo.data.firstName}!</h1>)}
+					</ul>
 						<Col>
-							<div>
-							Signed in as: {user.email}
-							</div>
+
 							<form onSubmit={handleAuthentication}>
 								<h1 style={{ fontSize: 22, color: "brown" }}>
 									Meat Products
