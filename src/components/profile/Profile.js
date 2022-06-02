@@ -8,7 +8,6 @@ import { Button, Container, Row, Col } from 'react-bootstrap'
 import firebase from 'firebase/compat/app';
 
 
-
 function Profile(){
     const navigate = useNavigate();
     const [{user}, dispatch] = useStateValue();
@@ -40,7 +39,7 @@ function Profile(){
     return(
         <div>
             <Navbar/>
-            <div>
+            <div className='header-card'> 
                 Profile
                 <br></br>
                 <Button type="submit" style={{
