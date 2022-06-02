@@ -37,7 +37,10 @@ function Createaccount() {
       
     
     function createUserProfile(uid){
-        db.collection('UserInfo').add({
+        db.collection('users')
+        .doc(user.uid)
+		.collection('userinfo')
+        .add({
             emailL: email,
             firstName: firstName, 
             lastName: lastName, 

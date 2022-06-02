@@ -48,7 +48,7 @@ function Home() {
 		
         db.collection('users')
 		.doc(user.uid)
-		.collection('food info')
+		.collection('userinfo')
 		.add({
             chicken: renderSwitchChicken(chicken),
             beef: renderSwitchBeef(beef),
@@ -61,6 +61,7 @@ function Home() {
 			uid: uid,
 			createdAt: new Date()
         });
+		console.log(user.uid);
     };
 
 	const recordFood = e =>
