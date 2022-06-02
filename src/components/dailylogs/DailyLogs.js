@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Button} from 'react-bootstrap'
 import firebase from 'firebase/compat/app';
-
+import background from "../../img/background.jpg";
 
 
 function DailyLog(){
@@ -84,43 +84,43 @@ function DailyLog(){
     return(
         <div>
             <Navbar/>
-            <div>
-            <div className='header-card'>
-                <h1> Your Food Logs </h1> 
-            </div>
-            <div className='row'>
-                <div className='column1'>
-                <Button type="submit" style={{
-									font: 'inherit', cursor: 'pointer',
-									border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
-								}} onClick = {fetchAll}>View My Daily Food Logs</Button>
+            <div style={{ backgroundImage: `url(${background})`, backgroundSize: `cover`, marginTop: `-50px`,}}>
+                <div className='header-card'>
+                    <h1> Your Food Logs </h1> 
                 </div>
-                <div className='column2'>
-                    graph of emissions
-                    {allDocs.map((doc)=>{
-                    return(
-                        <div>
-                            Created on: {doc.createdAt.toDate().toString()}
-                            <h5>Chicken: {doc.chicken} kg per year.</h5>
-                            <h5>Beef: {doc.beef} kg per year.</h5>
-                            <h5>Fish: {doc.fish} kg per year.</h5>
-                            <h5>Lamb: {doc.lamb} kg per year.</h5>
-                            <br>
-                            </br>
-                        </div> 
-                    )
-                })}
+                <div className='row'>
+                    <div className='column1'>
+                    <Button type="submit" style={{
+                                        font: 'inherit', cursor: 'pointer',
+                                        border: '1px solid bisque', background: 'bisque', color: 'black', padding: '0.5rem 2rem'
+                                    }} onClick = {fetchAll}>View My Daily Food Logs</Button>
+                    </div>
+                    <div className='column2'>
+                        graph of emissions
+                        {allDocs.map((doc)=>{
+                        return(
+                            <div>
+                                Created on: {doc.createdAt.toDate().toString()}
+                                <h5>Chicken: {doc.chicken} kg per year.</h5>
+                                <h5>Beef: {doc.beef} kg per year.</h5>
+                                <h5>Fish: {doc.fish} kg per year.</h5>
+                                <h5>Lamb: {doc.lamb} kg per year.</h5>
+                                <br>
+                                </br>
+                            </div> 
+                        )
+                    })}
+                    </div>
                 </div>
-            </div>
-            <div>
-                Signed in as:
-            </div>
-                <br>
-                </br>
-                <br>
-                </br>
-                <br>
-                </br>
+                <div>
+                    Signed in as:
+                </div>
+                    <br>
+                    </br>
+                    <br>
+                    </br>
+                    <br>
+                    </br>
 
             </div>
         </div>

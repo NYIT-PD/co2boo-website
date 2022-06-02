@@ -20,7 +20,7 @@ function Profile(){
         <div>
             <Navbar/>
             <div className='header-card'> 
-                Profile
+                <h1> Profile </h1>
             </div>
             
         </div>
