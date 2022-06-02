@@ -22,9 +22,7 @@ function Profile(){
             <div className='header-card'> 
                 Profile
             </div>
-            <div>
-                Signed in as: {user.email}
-            </div>
+            
         </div>
     )
 }
