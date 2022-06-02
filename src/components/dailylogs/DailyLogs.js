@@ -112,9 +112,7 @@ function DailyLog(){
                 })}
                 </div>
             </div>
-            <div>
-                Signed in as:
-            </div>
+            
                 <br>
                 </br>
                 <br>

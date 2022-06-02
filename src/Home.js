@@ -65,7 +65,7 @@ function Home() {
 		
         db.collection('users')
 		.doc(user.uid)
-		.collection('userinfo')
+		.collection('food info')
 		.add({
             chicken: renderSwitchChicken(chicken),
             beef: renderSwitchBeef(beef),

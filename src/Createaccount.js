@@ -37,9 +37,8 @@ function Createaccount() {
       
     
     function createUserProfile(uid){
-        db.collection('users')
-        .doc(user.uid)
-		.collection('userinfo')
+        db.collection('UserInfo')
+
         .add({
             emailL: email,
             firstName: firstName, 
@@ -47,7 +46,6 @@ function Createaccount() {
             gender: gender, 
             dob: dob, 
             phoneNo: phoneNo, 
-            uid: uid
         });
     };
 
