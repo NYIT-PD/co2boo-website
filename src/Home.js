@@ -20,8 +20,13 @@ import {auth, db} from "./firebase";
 import { useNavigate } from "react-router-dom";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import Navbar from './components/navbar/Navbar';
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
+
+
 
 function Home() {
+	const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 	const navigate = useNavigate();
   	const [chicken, setChicken] = useState("");
 	const [beef, setBeef] = useState("");
@@ -42,6 +47,25 @@ function Home() {
 	const [error, setError] = useState('');
 	const [chickenCO2, setChickenCO2] = useState("");
 	const [userInfo, setUserInfo] = useState([]);
+	
+	const auth = getAuth();
+	setPersistence(auth, browserSessionPersistence)
+	  .then(() => {
+		// Existing and future Auth states are now persisted in the current
+		// session only. Closing the window would clear any existing state even
+		// if a user forgets to sign out.
+		// ...
+		// New sign-in will be persisted with session persistence.
+		return signInWithEmailAndPassword(auth, email, password);
+	  })
+	  .catch((error) => {
+		// Handle Errors here.
+		const errorCode = error.code;
+		const errorMessage = error.message;
+	  });
+
+
+
 	
 	useEffect(() =>{
 		getName()
@@ -67,16 +91,10 @@ function Home() {
 		.doc(user.uid)
 		.collection('food info')
 		.add({
-            chicken: renderSwitchChicken(chicken),
-            beef: renderSwitchBeef(beef),
-			fish: renderSwitchFishFarmed(fish),
-			lamb: renderSwitchLamb(lamb),
-			banana: renderSwitchBanana(banana),
-			apple: renderSwitchApple(apple),
+            
 			email:user.email,
-			//date and specific time
-			uid: uid,
-			createdAt: new Date()
+			createdAt: new Date(),
+			total: calculateTotal(),
         });
 		console.log(user.uid);
     };

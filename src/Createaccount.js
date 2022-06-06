@@ -36,7 +36,7 @@ function Createaccount() {
 
       
     
-    function createUserProfile(uid){
+    function createUserProfile(){
         db.collection('UserInfo')
 
         .add({
@@ -60,9 +60,9 @@ function Createaccount() {
             .then((auth) => {
                 console.log(auth);
                 if(auth){
-                    var uid = user.uid
-                    createUserProfile(uid);
-                    console.log(uid)
+                    
+                    createUserProfile();
+                   
                     navigate('/home')
                 }
             })
