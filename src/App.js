@@ -5,6 +5,7 @@ import Home from "./Home";
 import Createaccount from './Createaccount';
 import DailyLogs from './components/dailylogs/DailyLogs'
 import Profile from './components/profile/Profile'
+import About from './components/about/About'
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import React, {useEffect} from "react";
 import {auth} from "./firebase"
@@ -56,6 +57,9 @@ function App() {
           </Route>
           <Route exact path = "/profile"
             element = {<Profile/>}>
+          </Route>
+          <Route exact path = "/about-us"
+            element = {<About/>}>
           </Route>
         </Routes>
       </div>

@@ -13,7 +13,7 @@ import renderSwitch, {
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { PieChart } from 'react-minimal-pie-chart';
-import logo from './logo.png';
+import logo from './logo5.png';
 ////////////////////////////////////////////////////
 import {useStateValue} from './components/dailylogs/StateProvider';
 import {auth, db} from "./firebase";
@@ -150,9 +150,13 @@ function Home() {
     <div>
       <Navbar/>
       <h1 align = "center" style={{ fontSize: 30, color: "" }}>
+		  <br>
+		  </br>
         <div className = "login__logo">
-             <img src = {logo}/>
+             <img src = {logo} />
         </div>
+		<br>
+		</br>
         Carbon Footprint Calculator
 				<br />
 			</h1>

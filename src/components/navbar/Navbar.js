@@ -4,14 +4,14 @@ import './Navbar.css';
 import {Button} from '../Button'
 import {auth} from "../../firebase";
 import {useNavigate } from "react-router-dom";
-
+import logo from '../../logo5.png';
 
 function Navbar() {
     const navigate = useNavigate(); 
 
     return(
         <nav className="NavbarItems">
-            <h1 className="navbar-logo"><i className="fab fa-react"> </i></h1>
+            
             <div className="menu-icon" >
                 <i className={'fas fa-times'}>
                 </i>
