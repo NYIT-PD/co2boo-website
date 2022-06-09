@@ -84,7 +84,7 @@ function DailyLog(){
     return(
         <div>
             <Navbar/>
-            <div style={{ backgroundImage: `url(${background})`, backgroundSize: `cover`, marginTop: `-50px`,}}>
+            <div style={{ backgroundImage: `url(${background})`, backgroundSize: `cover`, marginTop: `-50px`,height:`140vh`,marginBottom:`0px`}}>
                 <div className='header-card'>
                     <h1> Your Food Logs </h1> 
                 </div>
@@ -112,13 +112,6 @@ function DailyLog(){
                     </div>
                 </div>
             </div>
-            
-                <br>
-                </br>
-                <br>
-                </br>
-                <br>
-                </br>
 
             </div>
        

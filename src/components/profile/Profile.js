@@ -8,7 +8,7 @@ import { Button, Container, Row, Col } from 'react-bootstrap'
 import firebase from 'firebase/compat/app';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
-
+import background from "../../img/background.jpg";
 
 function Profile(){
     const navigate = useNavigate();
@@ -61,14 +61,21 @@ setPersistence(auth, browserSessionPersistence)
     return(
         <div>
             <Navbar/>
-            <div className='header-card'> 
+            <div style={{ backgroundImage: `url(${background})`, backgroundSize: `cover`, marginTop: `-50px`,height:`140vh`,marginBottom:`0px`}}>
+             
+              <div className='header-card'> 
                 <h1> Profile Information</h1>
-                {userInfo.map(userInfo => <h1 key={userInfo}> Name: {userInfo.data.firstName} {userInfo.data.lastName}</h1>)}
-                {userInfo.map(userInfo => <h1 key={userInfo}> Date of birth: {userInfo.data.dob}</h1>)}
-                {userInfo.map(userInfo => <h1 key={userInfo}> Gender: {userInfo.data.gender}</h1>)}
-                {userInfo.map(userInfo => <h1 key={userInfo}> Email: {userInfo.data.emailL}</h1>)}
-                {userInfo.map(userInfo => <h1 key={userInfo}> Phone Number: {userInfo.data.phoneNo}</h1>)}
-                
+              </div>
+              <div className='row'>
+                    <div className='column1'>
+                      {userInfo.map(userInfo => <h1 key={userInfo}> Name: {userInfo.data.firstName} {userInfo.data.lastName}</h1>)}
+                      {userInfo.map(userInfo => <h1 key={userInfo}> Date of birth: {userInfo.data.dob}</h1>)}
+                      {userInfo.map(userInfo => <h1 key={userInfo}> Gender: {userInfo.data.gender}</h1>)}
+                      {userInfo.map(userInfo => <h1 key={userInfo}> Email: {userInfo.data.emailL}</h1>)}
+                      {userInfo.map(userInfo => <h1 key={userInfo}> Phone Number: {userInfo.data.phoneNo}</h1>)}
+                    </div>
+              </div>
+
             </div>
             
         </div>
